@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://leeyongda.github.io/jym">
-  <title>golang rsa 加密 | Coding 博客</title>
+  <title>Archives: 2018 | Coding 博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="12345678910111213141516171819202122package mainimport (	&quot;crypto/aes&quot;	&quot;crypto/cipher&quot;	&quot;encoding/base64&quot;	&quot;crypto/sha1&quot;	&quot;fmt&quot;	&quot;bytes&quot;	&quot;encoding/hex&quot;	&quot;strings&quot;)// js 加密算法// var encrypted = CryptoJS.AES.en">
-<meta name="keywords" content="golang,爬虫">
-<meta property="og:type" content="article">
-<meta property="og:title" content="golang rsa 加密">
-<meta property="og:url" content="https://leeyongda.github.io/jym/2017/12/11/golang-rsa-加密/index.html">
+  <meta name="description" content="个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Coding 博客">
+<meta property="og:url" content="https://leeyongda.github.io/jym/archives/2018/index.html">
 <meta property="og:site_name" content="Coding 博客">
-<meta property="og:description" content="12345678910111213141516171819202122package mainimport (	&quot;crypto/aes&quot;	&quot;crypto/cipher&quot;	&quot;encoding/base64&quot;	&quot;crypto/sha1&quot;	&quot;fmt&quot;	&quot;bytes&quot;	&quot;encoding/hex&quot;	&quot;strings&quot;)// js 加密算法// var encrypted = CryptoJS.AES.en">
+<meta property="og:description" content="个人博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-12-11T06:53:16.434Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="golang rsa 加密">
-<meta name="twitter:description" content="12345678910111213141516171819202122package mainimport (	&quot;crypto/aes&quot;	&quot;crypto/cipher&quot;	&quot;encoding/base64&quot;	&quot;crypto/sha1&quot;	&quot;fmt&quot;	&quot;bytes&quot;	&quot;encoding/hex&quot;	&quot;strings&quot;)// js 加密算法// var encrypted = CryptoJS.AES.en">
+<meta name="twitter:title" content="Coding 博客">
+<meta name="twitter:description" content="个人博客">
   
     <link rel="alternative" href="/atom.xml" title="Coding 博客" type="application/atom+xml">
   
@@ -182,182 +180,60 @@ ga('send', 'pageview');
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-golang-rsa-加密" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      golang rsa 加密
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/jym/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/jym/2018/01/05/Scrapy-Socks5代理中间件/" class="archive-article-date">
+  	<time datetime="2018-01-05T09:30:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-05</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/jym/2018/01/05/Scrapy-Socks5代理中间件/">Scrapy-Socks5代理中间件</a>
     </h1>
   
 
-        
-        <a href="/jym/2017/12/11/golang-rsa-加密/" class="archive-article-date">
-  	<time datetime="2017-12-11T06:51:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"crypto/aes"</span></span><br><span class="line">	<span class="string">"crypto/cipher"</span></span><br><span class="line">	<span class="string">"encoding/base64"</span></span><br><span class="line">	<span class="string">"crypto/sha1"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"bytes"</span></span><br><span class="line">	<span class="string">"encoding/hex"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// js 加密算法</span></span><br><span class="line"><span class="comment">// var encrypted = CryptoJS.AES.encrypt(sendData, key,&#123;iv:iv,mode:CryptoJS.mode.CBC,padding:CryptoJS.pad.Pkcs7&#125;);</span></span><br><span class="line"><span class="comment">// 换成Golang 加密 实现一遍</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> appKey = <span class="string">"00003"</span>;</span><br><span class="line"><span class="keyword">const</span> appKeySecret = <span class="string">"754DHA8DHPN976DS"</span>;</span><br><span class="line"><span class="keyword">const</span> versionName = <span class="string">"1.0"</span></span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PKCS5Padding</span><span class="params">(ciphertext []<span class="keyword">byte</span>, blockSize <span class="keyword">int</span>)</span> []<span class="title">byte</span></span> &#123;</span><br><span class="line">	padding := blockSize - <span class="built_in">len</span>(ciphertext)%blockSize</span><br><span class="line">	padtext := bytes.Repeat([]<span class="keyword">byte</span>&#123;<span class="keyword">byte</span>(padding)&#125;, padding)</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">append</span>(ciphertext, padtext...)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AesEncrypt</span><span class="params">(origData, key []<span class="keyword">byte</span>)</span> <span class="params">([]<span class="keyword">byte</span>, error)</span></span> &#123;</span><br><span class="line">	block, err := aes.NewCipher(key)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	blockSize := block.BlockSize()</span><br><span class="line">	origData = PKCS5Padding(origData, blockSize)</span><br><span class="line">	iv := []<span class="keyword">byte</span>(<span class="string">"754DHA8DHPN976DS"</span>)</span><br><span class="line">	blockMode := cipher.NewCBCEncrypter(block, iv)</span><br><span class="line">	crypted := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="built_in">len</span>(origData))</span><br><span class="line">	blockMode.CryptBlocks(crypted, origData)</span><br><span class="line">	<span class="keyword">return</span> crypted, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">testAes</span><span class="params">()</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	key := []<span class="keyword">byte</span>(<span class="string">"754DHA8DHPN976DS"</span>)</span><br><span class="line">	result, err := AesEncrypt([]<span class="keyword">byte</span>(<span class="string">`&#123;"Phone":"13234567890"&#125;`</span>), key)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="built_in">panic</span>(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> jsonString = base64.StdEncoding.EncodeToString(result)</span><br><span class="line">	<span class="keyword">var</span> signStr = appKeySecret+<span class="string">"appKey"</span>+appKey+<span class="string">"jsonString"</span>+jsonString+<span class="string">"userToken"</span>+<span class="string">""</span>+<span class="string">"v"</span>+versionName+appKeySecret</span><br><span class="line">	r := sha1.Sum([]<span class="keyword">byte</span>(signStr))</span><br><span class="line">	signStr = strings.ToUpper(hex.EncodeToString(r[:]))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> signStr, jsonString</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line"></span><br><span class="line">	signstr, jsonstr := testAes()</span><br><span class="line">	fmt.Println(signstr, <span class="string">"\n"</span>,jsonstr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">golang</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爬虫</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://leeyongda.github.io/jym/2017/12/11/golang-rsa-加密/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/jym/2017/12/11/python-设计模式-适配器模式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          python 设计模式-适配器模式
-        
-      </div>
-    </a>
   
   
-    <a href="/jym/2017/12/10/golang-sign-加密算法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">golang sign 加密算法，仿某网站js sign加密算法</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -380,8 +256,8 @@ ga('send', 'pageview');
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
