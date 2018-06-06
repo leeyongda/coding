@@ -190,10 +190,20 @@
         </li>
       
         
+        <li class="menu-item menu-item-archives">
+          <a href="/jym/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-tags">
           <a href="/jym/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -203,19 +213,9 @@
         <li class="menu-item menu-item-categories">
           <a href="/jym/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/jym/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            归档
           </a>
         </li>
       
@@ -345,15 +345,8 @@
       
         
           
-          React - WebSocket基于React 实现 WebSocket 连接12
+            <h2 id="React-WebSocket"><a href="#React-WebSocket" class="headerlink" title="React - WebSocket"></a>React - WebSocket</h2><h3 id="基于React-实现-WebSocket-连接"><a href="#基于React-实现-WebSocket-连接" class="headerlink" title="基于React 实现 WebSocket 连接"></a>基于React 实现 WebSocket 连接</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
           
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/jym/2018/06/06/React-WebSokcet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -493,15 +486,17 @@
       
         
           
-          Golang–Channels(通道)一.  通道创建以最简单方式调用make函数创建的是一个无缓存的channel，但是我们也可以指定第二个整型参数，对应channel的容量。如果channel的容量大于零，那么该channel就是带缓存 channel。channel 容量 &gt; 0  即带
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/jym/2018/02/12/golang-Channels/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="Golang–Channels-通道"><a href="#Golang–Channels-通道" class="headerlink" title="Golang–Channels(通道)"></a>Golang–Channels(通道)</h2><h3 id="一-通道创建"><a href="#一-通道创建" class="headerlink" title="一.  通道创建"></a>一.  通道创建</h3><p>以最简单方式调用make函数创建的是一个无缓存的channel，但是我们也可以指定第二个整型参数，对应channel的容量。如果channel的容量大于零，那么该channel就是带缓存 channel。<br>channel 容量 &gt; 0  即带有缓冲的通道</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 创建无缓冲的的通道</span></span><br><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建有缓冲的通道</span></span><br><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">1</span>)</span><br><span class="line">ch1 := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="二-通道发送和接收"><a href="#二-通道发送和接收" class="headerlink" title="二.  通道发送和接收"></a>二.  通道发送和接收</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  发送数据到通道</span></span><br><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</span><br><span class="line">ch &lt;- <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 从通道中接收数据</span></span><br><span class="line">&lt;- ch</span><br></pre></td></tr></table></figure>
+<h3 id="三-通道的箭头使用-注意点。"><a href="#三-通道的箭头使用-注意点。" class="headerlink" title="三.  通道的箭头使用, 注意点。"></a>三.  通道的箭头使用, 注意点。</h3><ol>
+<li>chan &lt;- int 只发送int 的channel,  只能发送不能接收。</li>
+<li>&lt;- chan int 表示一个只接收int 的int channel, 只能接收不能发送。</li>
+<li>箭头 &lt;- 和关键字chan 的相对位置表明了channel 的方向。</li>
+<li>这种限制将在编译期检测。</li>
+</ol>
+
+          
         
       
     </div>
