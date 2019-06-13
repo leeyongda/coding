@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/coding/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/coding/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/coding/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/coding/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/coding/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/coding/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/coding/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Scrapy-Socks5代理中间件Demo环境： Python(2.7+) + Scrapy(1.1.1) + Twisted(16.6.0)官网没直接提供Socks 代理中间件 。所以写一个代理中间件 。需要依赖库 txsocksx 。pip install txsocksx">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrapy-Socks5代理中间件">
+<meta property="og:url" content="https://leeyongda.github.io/coding/2018/01/05/Scrapy-Socks5代理中间件/index.html">
+<meta property="og:site_name" content="Coding 博客">
+<meta property="og:description" content="Scrapy-Socks5代理中间件Demo环境： Python(2.7+) + Scrapy(1.1.1) + Twisted(16.6.0)官网没直接提供Socks 代理中间件 。所以写一个代理中间件 。需要依赖库 txsocksx 。pip install txsocksx">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-06T07:32:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scrapy-Socks5代理中间件">
+<meta name="twitter:description" content="Scrapy-Socks5代理中间件Demo环境： Python(2.7+) + Scrapy(1.1.1) + Twisted(16.6.0)官网没直接提供Socks 代理中间件 。所以写一个代理中间件 。需要依赖库 txsocksx 。pip install txsocksx">
+
+
+
+
+
+
+  <link rel="canonical" href="https://leeyongda.github.io/coding/2018/01/05/Scrapy-Socks5代理中间件/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Scrapy-Socks5代理中间件 | Coding 博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/coding/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Coding 博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/coding/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/coding/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/coding/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/coding/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://leeyongda.github.io/coding/coding/2018/01/05/Scrapy-Socks5代理中间件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Coding">
+      <meta itemprop="description" content="个人博客">
+      <meta itemprop="image" content="/coding/images/vim-go.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coding 博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scrapy-Socks5代理中间件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-05 17:30:15" itemprop="dateCreated datePublished" datetime="2018-01-05T17:30:15+08:00">2018-01-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-06 15:32:54" itemprop="dateModified" datetime="2018-06-06T15:32:54+08:00">2018-06-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/coding/categories/爬虫/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Scrapy-Socks5代理中间件"><a href="#Scrapy-Socks5代理中间件" class="headerlink" title="Scrapy-Socks5代理中间件"></a>Scrapy-Socks5代理中间件</h3><h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><p>环境： Python(2.7+) + Scrapy(1.1.1) + Twisted(16.6.0)<br>官网没直接提供Socks 代理中间件 。<br>所以写一个代理中间件 。<br>需要依赖库 txsocksx 。<br>pip install txsocksx<br><a id="more"></a></p>
+<h4 id="midddlewares-py"><a href="#midddlewares-py" class="headerlink" title="midddlewares.py"></a>midddlewares.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># 需要依赖 txsocksx</span></span><br><span class="line"><span class="comment"># pip install txsocksx</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> txsocksx.http <span class="keyword">import</span> SOCKS5Agent</span><br><span class="line"><span class="keyword">from</span> twisted.internet <span class="keyword">import</span> reactor</span><br><span class="line"><span class="keyword">from</span> scrapy.xlib.tx <span class="keyword">import</span> TCP4ClientEndpoint</span><br><span class="line"><span class="keyword">from</span> scrapy.core.downloader.webclient <span class="keyword">import</span> _parse</span><br><span class="line"><span class="keyword">from</span> scrapy.core.downloader.handlers.http11 <span class="keyword">import</span> HTTP11DownloadHandler, ScrapyAgent</span><br><span class="line"></span><br><span class="line">proxyHost = <span class="string">"xxxx.com"</span></span><br><span class="line">proxyPort = <span class="number">9020</span></span><br><span class="line">proxyUser = <span class="string">"1234"</span></span><br><span class="line">proxyPass = <span class="string">"pass"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Socks5DownloadHandler</span><span class="params">(HTTP11DownloadHandler)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">download_request</span><span class="params">(self, request, spider)</span>:</span></span><br><span class="line">        <span class="string">"""Return a deferred for the HTTP download"""</span></span><br><span class="line">        agent = ScrapySocks5Agent(contextFactory=self._contextFactory, pool=self._pool)</span><br><span class="line">        <span class="keyword">return</span> agent.download_request(request)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ScrapySocks5Agent</span><span class="params">(ScrapyAgent)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_agent</span><span class="params">(self, request, timeout)</span>:</span></span><br><span class="line">       <span class="comment"># bindAddress = request.meta.get('bindaddress') or self._bindAddress</span></span><br><span class="line">        <span class="comment">#proxy = request.meta.get('proxy')</span></span><br><span class="line">        <span class="comment">#if proxy:</span></span><br><span class="line">            <span class="comment">#_, _, proxyHost, proxyPort, proxyParams = _parse(proxy)</span></span><br><span class="line">            <span class="comment">#_, _, host, port, proxyParams = _parse(request.url)</span></span><br><span class="line">        proxyEndpoint = TCP4ClientEndpoint(reactor, proxyHost, proxyPort, endpointArgs=dict(methods=&#123;<span class="string">'login'</span>: &#123;proxyUser, proxyPass&#125;&#125;))</span><br><span class="line">        agent = SOCKS5Agent(reactor, proxyEndpoint=proxyEndpoint)</span><br><span class="line">        <span class="keyword">return</span> agent</span><br><span class="line">       <span class="comment"># return self._Agent(reactor, contextFactory=self._contextFactory,</span></span><br><span class="line">        <span class="comment">#    connectTimeout=timeout, bindAddress=bindAddress, pool=self._pool)</span></span><br></pre></td></tr></table></figure>
+<h4 id="settings-py"><a href="#settings-py" class="headerlink" title="settings.py"></a>settings.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOAD_HANDLERS = &#123;</span><br><span class="line">    <span class="string">"http"</span>: <span class="string">"myspider.midddlewares.Socks5DownloadHandler"</span>,</span><br><span class="line">    <span class="string">"https"</span>: <span class="string">"myspider.midddlewares.Socks5DownloadHandler"</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="End"><a href="#End" class="headerlink" title="End"></a>End</h3>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/coding/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/coding/2017/12/11/python-设计模式-适配器模式/" rel="next" title="python 设计模式-适配器模式">
+                <i class="fa fa-chevron-left"></i> python 设计模式-适配器模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/coding/2018/02/12/golang-Channels/" rel="prev" title="golang-Channels">
+                golang-Channels <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/coding/images/vim-go.png"
+                alt="Coding" />
+            
+              <p class="site-author-name" itemprop="name">Coding</p>
+              <p class="site-description motion-element" itemprop="description">个人博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/coding/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/coding/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/coding/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-Socks5代理中间件"><span class="nav-number">1.</span> <span class="nav-text">Scrapy-Socks5代理中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo"><span class="nav-number">1.1.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#midddlewares-py"><span class="nav-number">1.2.</span> <span class="nav-text">midddlewares.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#settings-py"><span class="nav-number">1.3.</span> <span class="nav-text">settings.py</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#End"><span class="nav-number">2.</span> <span class="nav-text">End</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coding</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.3.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/coding/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/coding/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/coding/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/coding/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/coding/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/coding/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/coding/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/coding/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/coding/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/coding/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
